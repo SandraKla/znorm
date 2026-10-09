@@ -1,0 +1,44 @@
+---
+title: "Standardization of Laboratory Data using znorm"
+author: "Sandra Klawitter"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Standardization of Laboratory Data using znorm}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+The znorm() function and its related utilities provide methods for Box-Cox standardizing and normalizing laboratory measurement data using reference limits. The lower reference limits (LL) and upper reference limits (UL) can transform any result x into a znorm value using the following equation. Values ranging from –1.96 to 1.96 are considered normal, while values below –5 and above 5 indicate pathological conditions. For lambda = 0 the result equals of zlog() for lambda = 1 the results of z().
+
+## Usage
+Below is a basic demonstration of applying znorm transformations.
+
+```{r setup, message = FALSE}
+library(znorm)
+```
+
+We can transform laboratory measurements based on defined lower and upper reference limits:
+
+```{r example}
+# Example analyte measurements
+vals <- c(10, 15, 20, 25, 30, 100)
+
+# Calculate znorm values using Lower limit (L) and Upper limit (U)
+znorm_scores <- znorm(vals, limits = c(12,15))
+
+# Print standardized znorm scores
+print(znorm_scores)
+```
+Use the same reference limits to recover the original measurements:
+
+```{r inverse}
+iznorm(znorm_scores, limits = c(12, 25))
+```

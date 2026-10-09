@@ -1,0 +1,49 @@
+---
+title: "Standardization of Laboratory Data using zlog"
+author: "Sandra Klawitter"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Standardization of Laboratory Data using zlog}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+The zlog() function and its related utilities provide methods for standardizing and normalizing laboratory measurement data using reference limits. The lower reference limits (LL) and upper reference limits (UL) can transform any result x into a zlog value using the following equation: zlog(x) = (log(x)–(log(LL)+ log(UL))/2)*3.92/(log(UL)–log(LL)). Values ranging from –1.96 to 1.96 are considered normal, while values below –5 and above 5 indicate pathological conditions.
+
+## Usage
+Below is a basic demonstration of applying zlog transformations.
+
+```{r setup, message = FALSE}
+library(znorm)
+```
+
+We can transform laboratory measurements based on defined lower and upper reference limits:
+
+```{r example}
+# Example analyte measurements
+vals <- c(10, 15, 20, 25, 30, 100)
+
+# Calculate zlog values using Lower limit (L) and Upper limit (U)
+zlog_scores <- zlog(vals, limits = c(12, 25))
+
+# Print standardized zlog scores
+print(zlog_scores)
+```
+
+Use the same reference limits to recover the original measurements:
+
+```{r inverse}
+izlog(zlog_scores, limits = c(12, 25))
+```
+
+### References
+
+Hoffmann, Georg & Klawonn, Frank & Lichtinghagen, Ralf & Orth, Matthias. (2018). The zlog value as a basis for the standardization of laboratory results. LaboratoriumsMedizin. 41. 10.1515/labmed-2017-0135. 

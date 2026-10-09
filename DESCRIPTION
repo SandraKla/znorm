@@ -1,0 +1,28 @@
+Package: znorm
+Type: Package
+Title: Box-Cox Standardization of Laboratory Measurements
+Version: 0.1.0
+Authors@R: c(person("Sandra", "Klawitter", role = c("aut", "cre"),
+                     email = "sandra.klawitter@trillium.de"),
+                     person("Georg", "Hoffmann", role = "aut"),
+                     person("Frank", "Klawonn", role = "aut"))
+Maintainer: Sandra Klawitter <sandra.klawitter@trillium.de>
+Description: Standardizes positive laboratory measurements relative to
+    reference limits using a Box-Cox transformation with a supplied power
+    parameter. Provides the inverse transformation and supports reference
+    limits and power parameters specific to each measurement. Extends the
+    zlog approach of Hoffmann et al. (2017)
+    <doi:10.1515/labmed-2016-0087> using the transformation of
+    Box and Cox (1964) <doi:10.1111/j.2517-6161.1964.tb00553.x>.
+License: GPL (>= 3)
+Encoding: UTF-8
+Depends: R (>= 3.6.0)
+Imports: stats
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
